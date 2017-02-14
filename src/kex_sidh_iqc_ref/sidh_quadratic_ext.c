@@ -33,72 +33,54 @@ void oqs_sidh_iqc_ref_fp_init_chararacteristic(const mpz_t p) {
 	mpz_init_set(characteristic, p);
 }
 
-void oqs_sidh_iqc_ref_fp_set(mpz_t x,
-                             const mpz_t a) {
+void oqs_sidh_iqc_ref_fp_set(mpz_t x, const mpz_t a) {
 	mpz_mod(x, a, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_add(mpz_t x,
-                             const mpz_t a,
-                             const mpz_t b) {
+void oqs_sidh_iqc_ref_fp_add(mpz_t x, const mpz_t a, const mpz_t b) {
 	mpz_add(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_add_ui(mpz_t x,
-                                const mpz_t a,
-                                unsigned long b) {
+void oqs_sidh_iqc_ref_fp_add_ui(mpz_t x, const mpz_t a, unsigned long b) {
 	mpz_add_ui(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_sub(mpz_t x,
-                             const mpz_t a,
-                             const mpz_t b) {
+void oqs_sidh_iqc_ref_fp_sub(mpz_t x, const mpz_t a, const mpz_t b) {
 	mpz_sub(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_sub_ui(mpz_t x,
-                                const mpz_t a,
-                                unsigned long b) {
+void oqs_sidh_iqc_ref_fp_sub_ui(mpz_t x, const mpz_t a, unsigned long b) {
 	mpz_sub_ui(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_mul(mpz_t x,
-                             const mpz_t a,
-                             const mpz_t b) {
+void oqs_sidh_iqc_ref_fp_mul(mpz_t x, const mpz_t a, const mpz_t b) {
 	mpz_mul(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_mul_si(mpz_t x,
-                                const mpz_t a,
-                                long b) {
+void oqs_sidh_iqc_ref_fp_mul_si(mpz_t x, const mpz_t a, long b) {
 	mpz_mul_si(x, a, b);
 	mpz_mod(x, x, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_inv(mpz_t x,
-                             const mpz_t a) {
+void oqs_sidh_iqc_ref_fp_inv(mpz_t x, const mpz_t a) {
 	mpz_invert(x, a, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp_div(mpz_t x,
-                             const mpz_t a,
-                             const mpz_t b) {
+void oqs_sidh_iqc_ref_fp_div(mpz_t x, const mpz_t a, const mpz_t b) {
 	oqs_sidh_iqc_ref_fp_inv(x, b);
 	oqs_sidh_iqc_ref_fp_mul(x, a, x);
 }
 
-void oqs_sidh_iqc_ref_fp_neg(mpz_t x,
-                             const mpz_t a) {
+void oqs_sidh_iqc_ref_fp_neg(mpz_t x, const mpz_t a) {
 	oqs_sidh_iqc_ref_fp_sub(x, characteristic, a);
 }
 
-void oqs_sidh_iqc_ref_fp_sqrt(mpz_t x,
-                              const mpz_t a) {
+void oqs_sidh_iqc_ref_fp_sqrt(mpz_t x, const mpz_t a) {
 	mpz_t exponent;
 	mpz_init(exponent);
 
@@ -112,26 +94,20 @@ void oqs_sidh_iqc_ref_fp_sqrt(mpz_t x,
 
 //////////////// fp2 methods //////////////////////////
 
-void oqs_sidh_iqc_ref_fp2_init(fp2_element_t x) {
-	mpz_inits(x->a, x->b, NULL);
-}
+void oqs_sidh_iqc_ref_fp2_init(fp2_element_t x) { mpz_inits(x->a, x->b, NULL); }
 
-void oqs_sidh_iqc_ref_fp2_init_set_si(fp2_element_t x,
-                                      long a,
-                                      long b) {
+void oqs_sidh_iqc_ref_fp2_init_set_si(fp2_element_t x, long a, long b) {
 	mpz_init_set_si(x->a, a);
 	mpz_init_set_si(x->b, b);
 }
 
-void oqs_sidh_iqc_ref_fp2_init_set_str(fp2_element_t x,
-                                       const char *a,
+void oqs_sidh_iqc_ref_fp2_init_set_str(fp2_element_t x, const char *a,
                                        const char *b) {
 	mpz_init_set_str(x->a, a, 10);
 	mpz_init_set_str(x->b, b, 10);
 }
 
-void oqs_sidh_iqc_ref_fp2_init_set(fp2_element_t x,
-                                   const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_init_set(fp2_element_t x, const fp2_element_t a) {
 	mpz_init_set(x->a, a->a);
 	mpz_init_set(x->b, a->b);
 }
@@ -140,8 +116,7 @@ void oqs_sidh_iqc_ref_fp2_clear(fp2_element_t x) {
 	mpz_clears(x->a, x->b, NULL);
 }
 
-void oqs_sidh_iqc_ref_fp2_set(fp2_element_t x,
-                              const fp2_element_t b) {
+void oqs_sidh_iqc_ref_fp2_set(fp2_element_t x, const fp2_element_t b) {
 	mpz_set(x->a, b->a);
 	mpz_set(x->b, b->b);
 }
@@ -181,36 +156,31 @@ char *oqs_sidh_iqc_ref_fp2_get_str(const fp2_element_t a) {
 	return result;
 }
 
-void oqs_sidh_iqc_ref_fp2_add(fp2_element_t x,
-                              const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_add(fp2_element_t x, const fp2_element_t a,
                               const fp2_element_t b) {
 	oqs_sidh_iqc_ref_fp_add(x->a, a->a, b->a);
 	oqs_sidh_iqc_ref_fp_add(x->b, a->b, b->b);
 }
 
-void oqs_sidh_iqc_ref_fp2_add_ui(fp2_element_t x,
-                                 const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_add_ui(fp2_element_t x, const fp2_element_t a,
                                  unsigned long b) {
 	oqs_sidh_iqc_ref_fp_add_ui(x->b, a->b, b);
 	oqs_sidh_iqc_ref_fp_set(x->a, a->a);
 }
 
-void oqs_sidh_iqc_ref_fp2_sub(fp2_element_t x,
-                              const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_sub(fp2_element_t x, const fp2_element_t a,
                               const fp2_element_t b) {
 	oqs_sidh_iqc_ref_fp_sub(x->a, a->a, b->a);
 	oqs_sidh_iqc_ref_fp_sub(x->b, a->b, b->b);
 }
 
-void oqs_sidh_iqc_ref_fp2_sub_ui(fp2_element_t x,
-                                 const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_sub_ui(fp2_element_t x, const fp2_element_t a,
                                  unsigned long b) {
 	oqs_sidh_iqc_ref_fp_sub_ui(x->b, a->b, b);
 	oqs_sidh_iqc_ref_fp_set(x->a, a->a);
 }
 
-void oqs_sidh_iqc_ref_fp2_mul(fp2_element_t x,
-                              const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_mul(fp2_element_t x, const fp2_element_t a,
                               const fp2_element_t b) {
 	mpz_t temp1;
 	mpz_t temp2;
@@ -241,8 +211,7 @@ void oqs_sidh_iqc_ref_fp2_mul(fp2_element_t x,
 	oqs_sidh_iqc_ref_fp2_clear(result);
 }
 
-void oqs_sidh_iqc_ref_fp2_square(fp2_element_t x,
-                                 const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_square(fp2_element_t x, const fp2_element_t a) {
 	mpz_t temp1;
 	mpz_t temp2;
 
@@ -268,8 +237,7 @@ void oqs_sidh_iqc_ref_fp2_square(fp2_element_t x,
 	oqs_sidh_iqc_ref_fp2_clear(result);
 }
 
-void oqs_sidh_iqc_ref_fp2_pow_ui(fp2_element_t x,
-                                 const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_pow_ui(fp2_element_t x, const fp2_element_t a,
                                  unsigned long n) {
 	mpz_t temp_n;
 	mpz_init_set_ui(temp_n, n);
@@ -277,8 +245,7 @@ void oqs_sidh_iqc_ref_fp2_pow_ui(fp2_element_t x,
 	mpz_clear(temp_n);
 }
 
-void oqs_sidh_iqc_ref_fp2_pow(fp2_element_t x,
-                              const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_pow(fp2_element_t x, const fp2_element_t a,
                               const mpz_t n) {
 	if (mpz_cmp_ui(n, 0) == 0) {
 		oqs_sidh_iqc_ref_fp2_one(x);
@@ -303,35 +270,30 @@ void oqs_sidh_iqc_ref_fp2_pow(fp2_element_t x,
 	oqs_sidh_iqc_ref_fp2_clear(temp2);
 }
 
-void oqs_sidh_iqc_ref_fp2_conjugate(fp2_element_t x,
-                                    const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_conjugate(fp2_element_t x, const fp2_element_t a) {
 	oqs_sidh_iqc_ref_fp2_set(x, a);
 	oqs_sidh_iqc_ref_fp_neg(x->a, x->a);
 }
 
-void oqs_sidh_iqc_ref_fp2_negate(fp2_element_t x,
-                                 const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_negate(fp2_element_t x, const fp2_element_t a) {
 	oqs_sidh_iqc_ref_fp2_set(x, a);
 	oqs_sidh_iqc_ref_fp_neg(x->a, x->a);
 	oqs_sidh_iqc_ref_fp_neg(x->b, x->b);
 }
 
-void oqs_sidh_iqc_ref_fp2_mul_scaler(fp2_element_t x,
-                                     const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_mul_scaler(fp2_element_t x, const fp2_element_t a,
                                      const mpz_t scaler) {
 	oqs_sidh_iqc_ref_fp_mul(x->a, a->a, scaler);
 	oqs_sidh_iqc_ref_fp_mul(x->b, a->b, scaler);
 }
 
-void oqs_sidh_iqc_ref_fp2_mul_scaler_si(fp2_element_t x,
-                                        const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_mul_scaler_si(fp2_element_t x, const fp2_element_t a,
                                         long scaler) {
 	oqs_sidh_iqc_ref_fp_mul_si(x->a, a->a, scaler);
 	oqs_sidh_iqc_ref_fp_mul_si(x->b, a->b, scaler);
 }
 
-void oqs_sidh_iqc_ref_fp2_inv(fp2_element_t x,
-                              const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_inv(fp2_element_t x, const fp2_element_t a) {
 	mpz_t temp;
 	fp2_element_t result;
 
@@ -348,8 +310,7 @@ void oqs_sidh_iqc_ref_fp2_inv(fp2_element_t x,
 	oqs_sidh_iqc_ref_fp2_clear(result);
 }
 
-void oqs_sidh_iqc_ref_fp2_div(fp2_element_t x,
-                              const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_div(fp2_element_t x, const fp2_element_t a,
                               const fp2_element_t b) {
 	fp2_element_t result;
 	oqs_sidh_iqc_ref_fp2_init(result);
@@ -369,19 +330,16 @@ int oqs_sidh_iqc_ref_fp2_is_one(const fp2_element_t a) {
 	return !mpz_cmp_si(a->a, 0) && !mpz_cmp_si(a->b, 1);
 }
 
-int oqs_sidh_iqc_ref_fp2_equals(const fp2_element_t a,
-                                const fp2_element_t b) {
+int oqs_sidh_iqc_ref_fp2_equals(const fp2_element_t a, const fp2_element_t b) {
 	return (mpz_cmp(a->a, b->a) == 0) && (mpz_cmp(a->b, b->b) == 0);
 }
 
-void oqs_sidh_iqc_ref_fp2_random(fp2_element_t x,
-                                 gmp_randstate_t randstate) {
+void oqs_sidh_iqc_ref_fp2_random(fp2_element_t x, gmp_randstate_t randstate) {
 	mpz_urandomm(x->a, randstate, characteristic);
 	mpz_urandomm(x->b, randstate, characteristic);
 }
 
-void oqs_sidh_iqc_ref_fp2_sqrt(fp2_element_t x,
-                               const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_sqrt(fp2_element_t x, const fp2_element_t a) {
 	mpz_t exponent;
 	fp2_element_t temp_a;
 	fp2_element_t b;
@@ -422,7 +380,6 @@ void oqs_sidh_iqc_ref_fp2_sqrt(fp2_element_t x,
 	oqs_sidh_iqc_ref_fp2_mul_scaler(b, b, base_root);
 	oqs_sidh_iqc_ref_fp2_div(x, b, c);
 
-
 	mpz_clear(exponent);
 	oqs_sidh_iqc_ref_fp2_clear(temp_a);
 	oqs_sidh_iqc_ref_fp2_clear(b);
@@ -456,8 +413,7 @@ int oqs_sidh_iqc_ref_fp2_is_square(const fp2_element_t a) {
 	return result;
 }
 
-void oqs_sidh_iqc_ref_fp2_norm(mpz_t x,
-                               const fp2_element_t a) {
+void oqs_sidh_iqc_ref_fp2_norm(mpz_t x, const fp2_element_t a) {
 	mpz_t temp1;
 	mpz_t temp2;
 	mpz_inits(temp1, temp2, NULL);
@@ -470,16 +426,18 @@ void oqs_sidh_iqc_ref_fp2_norm(mpz_t x,
 	mpz_clears(temp1, temp2, NULL);
 }
 
-void oqs_sidh_iqc_ref_fp2_to_bytes(uint8_t *bytes,
-                                   const fp2_element_t a,
+void oqs_sidh_iqc_ref_fp2_to_bytes(uint8_t *bytes, const fp2_element_t a,
                                    long prime_size) {
+	for (long i = 0; i < 2 * prime_size; i++)
+		bytes[i] = 0;
+
 	mpz_export(bytes, NULL, -1, 1, 0, 0, a->a);
 	mpz_export(bytes + prime_size, NULL, -1, 1, 0, 0, a->b);
 }
 
-void oqs_sidh_iqc_ref_bytes_to_fp2(fp2_element_t a,
-                                   const uint8_t *bytes,
+void oqs_sidh_iqc_ref_bytes_to_fp2(fp2_element_t a, const uint8_t *bytes,
                                    long prime_size) {
+	oqs_sidh_iqc_ref_fp2_zero(a);
 	mpz_import(a->a, prime_size, -1, 1, 0, 0, bytes);
 	mpz_import(a->b, prime_size, -1, 1, 0, 0, bytes + prime_size);
 }

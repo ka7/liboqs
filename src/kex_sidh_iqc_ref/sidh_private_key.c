@@ -29,7 +29,7 @@ void oqs_sidh_iqc_ref_private_key_clear(private_key_t private_key) {
 }
 
 void oqs_sidh_iqc_ref_private_key_generate(private_key_t private_key,
-        const public_params_t params) {
+                                           const public_params_t params) {
 	gmp_randstate_t randstate;
 	gmp_randinit_default(randstate);
 	mpz_t seed;
@@ -54,12 +54,9 @@ void oqs_sidh_iqc_ref_private_key_generate(private_key_t private_key,
 	mpz_clear(seed);
 }
 
-void oqs_sidh_iqc_ref_private_key_compute_kernel_gen(point_t gen,
-        const private_key_t private_key,
-        const point_t P,
-        const point_t Q,
-        const mpz_t le,
-        const elliptic_curve_t E) {
+void oqs_sidh_iqc_ref_private_key_compute_kernel_gen(
+    point_t gen, const private_key_t private_key, const point_t P,
+    const point_t Q, const mpz_t le, const elliptic_curve_t E) {
 	mpz_t temp_m;
 	mpz_t temp_n;
 	mpz_init_set(temp_m, private_key->m);
@@ -86,15 +83,20 @@ void oqs_sidh_iqc_ref_private_key_print(const private_key_t private_key) {
 }
 
 void oqs_sidh_iqc_ref_private_key_to_bytes(uint8_t *bytes,
-        const private_key_t private_key,
-        long prime_size) {
+                                           const private_key_t private_key,
+                                           long prime_size) {
+	for (long i = 0; i < 2 * prime_size; i++)
+		bytes[i] = 0;
+
 	mpz_export(bytes, NULL, -1, 1, 0, 0, private_key->m);
 	mpz_export(bytes + prime_size, NULL, -1, 1, 0, 0, private_key->n);
 }
 
 void oqs_sidh_iqc_ref_bytes_to_private_key(private_key_t private_key,
-        const uint8_t *bytes,
-        long prime_size) {
+                                           const uint8_t *bytes,
+                                           long prime_size) {
+	mpz_set_ui(private_key->m, 0);
+	mpz_set_ui(private_key->n, 0);
 	mpz_import(private_key->m, prime_size, -1, 1, 0, 0, bytes);
 	mpz_import(private_key->n, prime_size, -1, 1, 0, 0, bytes + prime_size);
 }
